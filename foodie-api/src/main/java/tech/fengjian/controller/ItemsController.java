@@ -12,6 +12,7 @@ import tech.fengjian.pojo.ItemsParam;
 import tech.fengjian.pojo.ItemsSpec;
 import tech.fengjian.pojo.vo.CommentLevelCountsVO;
 import tech.fengjian.pojo.vo.ItemInfoVO;
+import tech.fengjian.pojo.vo.ShopCartVO;
 import tech.fengjian.service.ItemService;
 import tech.fengjian.utils.JSONResult;
 import tech.fengjian.utils.PagedGridResult;
@@ -131,7 +132,7 @@ public class ItemsController extends BaseController {
             @ApiParam(name = "pageSize", value = "分页的每一页显示条数", required = false)
             @RequestParam Integer pageSize) {
 
-        if (catId==null) {
+        if (catId == null) {
             return JSONResult.errorMsg(null);
         }
 
@@ -145,5 +146,20 @@ public class ItemsController extends BaseController {
 
         PagedGridResult grid = this.itemService.searchItems(catId, sort, page, pageSize);
         return JSONResult.ok(grid);
+    }
+
+    // 用于用户长时间未登录网站，刷新购物车中商品数据（主要是价格）
+    @ApiOperation(value = "根据商品规格ids查询最新商品信息", notes = "搜搜商品列表", httpMethod = "GET")
+    @GetMapping("/refresh")
+    public JSONResult catItems(
+            @ApiParam(name = "itemSpecIds", value = "拼接的规格ids", required = false, example = "1001,1003,1005")
+            @RequestParam String itemSpecIds) {
+
+        if (StringUtils.isBlank(itemSpecIds)) {
+            return JSONResult.ok();
+        }
+
+        List<ShopCartVO> list = itemService.queryItemsBySpecIds(itemSpecIds);
+        return JSONResult.ok(list);
     }
 }

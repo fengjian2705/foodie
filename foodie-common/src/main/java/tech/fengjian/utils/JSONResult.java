@@ -40,6 +40,10 @@ public class JSONResult {
         return new JSONResult(500, msg, null);
     }
 
+    public static JSONResult errorMap(Object data) {
+        return new JSONResult(500, null, data);
+    }
+
     public static JSONResult ok() {
         return new JSONResult(null);
     }
