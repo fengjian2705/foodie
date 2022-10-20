@@ -1,12 +1,13 @@
 package tech.fengjian;
 
+import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import tk.mybatis.spring.annotation.MapperScan;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = PageHelperAutoConfiguration.class)
 // 扫描 mybatis 通用 mapper 所在包
 @MapperScan(basePackages = "tech.fengjian.mapper")
 // 扫描所有包及相关组件包

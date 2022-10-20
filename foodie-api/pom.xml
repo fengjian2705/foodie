@@ -11,6 +11,9 @@
 
     <artifactId>foodie-api</artifactId>
 
+    <!--打包war[第一步]-->
+    <packaging>war</packaging>
+
     <dependencies>
 
         <!--
@@ -30,6 +33,7 @@
             <artifactId>foodie-payment</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
 
 </project>

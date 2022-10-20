@@ -4,7 +4,7 @@
 #
 ############################################################
 server:
-  port: 8088
+#  port: 8088
   tomcat:
     uri-encoding: UTF-8
   max-http-header-size: 80KB
@@ -15,12 +15,14 @@ server:
 #
 ############################################################
 spring:
+  profiles:
+    active: prod
   datasource: # 数据源的相关配置
     type: com.zaxxer.hikari.HikariDataSource # 数据源类型：HikariCP
     driver-class-name: com.mysql.jdbc.Driver # mysql驱动
-    url: jdbc:mysql://192.168.147.129:3306/foodie-shop?useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnect
+#    url: jdbc:mysql://192.168.147.129:3306/foodie-shop?useSSL=false&useUnicode=true&characterEncoding=UTF-8&autoReconnect
     username: root
-    password: admin
+#    password: admin
   hikari:
     connection-timeout: 30000 # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException
     minimum-idle: 5 # 最小连接数
@@ -42,8 +44,8 @@ spring:
 mybatis:
   type-aliases-package: tech.fengjian.pojo # 所有POJO类所在包路径
   mapper-locations: classpath:mapper/*.xml # mapper映射文件
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ############################################################
 # #
 #  mybatis mapper 配置
